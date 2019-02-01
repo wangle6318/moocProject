@@ -1,0 +1,269 @@
+/*video::-webkit-media-controls{
+	display: none !important;
+}*/
+
+.video-content{
+	width: auto;
+	height: auto;
+	margin: 0 20px 0 80px !important;
+}
+
+.video-left{
+	width: 910px;
+	height: auto;
+	/*background-color:lawngreen;*/
+	float: left;
+}
+
+.video-left > h3{
+	height: 50px;
+	line-height: 50px;
+	background-color: #f7f7f7;
+	font-family:  微软雅黑, 'Microsoft YaHei';
+}
+
+.video-left h3 span{
+	font-size: 12px;
+	color: #999;
+}
+
+.video-frame{
+	text-align: center;
+	padding: 0 0px;
+	/*margin-bottom: 20px;*/
+	background-color: #404040;
+	height: 512px;
+}
+
+.video-frame video{
+	width: 910px;
+	height: 512px;
+	background-color: #404040;
+}
+
+.video-collect{
+	height: 27px;
+	width: 100%;
+	background-color: #404040;
+	vertical-align: middle;
+}
+
+.video-collect > p{
+	padding:0 8px;
+	color: #999;
+	font-size: 14px;
+	line-height: 27px;
+	height: 27px;
+	font-family: "楷体";
+}
+
+.video-collect button{
+	padding: 5px 10px;
+	border: none;
+	text-decoration: none;
+	border-radius: 10px;
+	background-color: #64b136;
+	color: white;
+	font-weight: bold;
+	outline: none;
+	float: right;
+	cursor: pointer;
+}
+
+.video-collect button:hover{
+	background-color: #FF6429;
+}
+
+.video-collect .video-like img{
+	height: 14px;
+	position: relative;
+	top: 2px;
+	margin-right: 5px;
+}
+
+.video-score {
+	cursor: default !important;
+}
+
+.video-collect .video-score img{
+	height: 14px;
+	position: relative;
+	top: 2px;
+	margin: 0 -3px;
+	cursor: pointer;
+}
+
+.video-comment{
+	padding-top: 20px;
+	background-color: #f7f7f7;
+}
+
+.top-comment > h3,
+.middle-comment > h3{
+	padding: 0 8px;
+	width: 894px;
+	font-family: Microsoft YaHei,Heiti SC;
+	font-size: 20px;
+    font-weight: 100;
+    margin-bottom: 5px;
+    line-height: 25px;
+    height: 25px;
+    display: inline-block;
+}
+
+.top-comment > h3 >span{
+	float: right;
+};
+
+.comment-area{
+	padding: 0 8px;
+	width: 894px;
+	height: auto;
+}
+
+.comment-area > textarea{
+	margin: 0 8px;
+	width: 872px;
+	height: 100px;
+	outline: none;
+	border: 1px solid #FF6429;
+	resize: none;
+	font-size: 16px;
+	padding: 10px 10px;
+}
+
+.comment-area > p{
+	margin: 0 8px;
+	text-align: right;
+	width: 894px;
+}
+
+.comment-area > p >button{
+	color: white;
+	font-weight: bold;
+	background-color: #FF6429;
+	padding: 5px 10px;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	border-radius: 3px;
+}
+
+.comment-area >p >button:hover{
+	background-color: #328BD2;
+}
+
+.middle-comment > h3{
+	padding-bottom: 5px;
+	border-bottom: 3px solid #FF6429;
+}
+
+.comment-list > li{
+	padding: 0 8px;
+	height: inherit;
+	width: 894px;
+	/*background-color: burlywood;*/
+	border-bottom: 1px solid #FF6429;
+	padding-bottom: 20px;
+	font-family: "微软雅黑","宋体",hiragino sans gb,microsoft yahei,simsun;;
+}
+
+.comment-list-top{
+	height: 30px;
+	width: 894px;
+	line-height: 30px;
+}
+
+.comment-list-top .com-author{
+	font-weight: bold;
+}
+
+.comment-list-top .com-date{
+	font-size: 12px;
+	margin-left: 20px;
+	color: #999;
+}
+
+.comment-list-middle{
+	text-indent: 2em;
+	font-size: 14px;
+	line-height: 24px;
+}
+
+.comment-list-bottom{
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	color: #999;
+}
+
+.comment-list-bottom > span{
+	margin-right: 20px;
+	height: 30px;
+}
+
+.comment-list-bottom > span > a{
+	text-decoration: none;
+	color: #999;
+}
+
+.comment-list-bottom img{
+	height: 20px;
+	position: relative;
+	top: 4px;
+}
+
+.reply-area{
+	width: 892px;
+	height: 170px;
+	border: 1px solid #FF6429;
+	display: none;
+}
+
+.reply-area > textarea{
+	padding: 8px 8px;
+	height: 104px;
+	width: 876px;
+	border-top-style: none;
+	border-left-style:none ;
+	border-right-style: none;
+	border-bottom: 1px solid #FF6429;
+/*	/*border: none;*/
+	outline: none;
+	text-decoration: none;
+	resize: none;
+	font-size: 16px;
+	margin-bottom: 0px;
+}
+
+
+.reply-area > p{
+	padding: 0;
+	margin-top: 0px;
+	display: block;
+	height: 50px;
+	line-height: 50px;
+}
+
+.reply-area > p >a{
+	position: relative;
+	padding: 5px 10px;
+	background-color: #FF6429;
+	color: white;
+	font-weight: bold;
+	text-decoration: none;
+	top: -4px;
+	left: 840px;
+	font-size: 12px;
+	border-radius: 3px;
+}
+
+.video-right{
+	width: 300px;
+	height: 400px;
+	/*background-color: violet;*/
+	float: left;
+	margin-left: 56px;
+	margin-top: 30px;
+}
+

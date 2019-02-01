@@ -1,0 +1,237 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>与诗学堂</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/jSlider.min.css' %}"/>
+	</head>
+	<body>
+		<div class="mooc">
+			<div class="mooc-top">
+				<div class="top-title">
+					<div class="top-logo">
+                        <a href="{% url 'mooc:index' %}"><img src="{% static 'img/logo.png' %}"/></a>
+					</div>
+					<div class="top-search">
+						<form action="" method="post">
+							<input type="text" name="" id="" value="" placeholder="搜索感兴趣的视频"/>
+							<button type="submit" value="search" class="search-btn" id="">
+								<img src="{% static 'img/search.png' %}"/>
+							</button>
+						</form>
+					</div>
+                    <div class="top-login">
+                        <a href="javascript:void(0);">登陆</a>
+                        <span>|</span>
+                        <a href="javascript:void(0);">注册</a>
+                    </div>
+				</div>
+				<div class="top-carousel">
+					<div class="top-menu">
+						<ul>
+                            {% for tag in all_tag %}
+                                <li><a href="{% url 'mooc:category_list' up_id=tag.id %}">{{ tag.name }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+					<div class="mooc-carousel">
+						<div class="jSlider" id="slider1" data-navigation = "hover" data-indicator = "hover" data-loop = "True">
+							{% for foo in slide %}
+							    <div><img src="{{ foo.photo.url }}"/></div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="mooc-middle">
+				<div class="recommend-course">
+					<p>推荐课程<p>
+					<div class="recommend-course-list">
+						<ul>
+                            {% for course in rcourse %}
+                                <li>
+                                    <a href="{% url 'mooc:video' cid=course.id %}"><img src="{{ course.photo.url }}"/></a>
+                                    <div class="recommend-course-info">
+                                        <p class="r-title">{{ course.name }}</p>
+                                        <p class="r-tag">{{ course.tag }}</p>
+                                        <p class="r-belong"><span>贡献人：{{ course.autor }}</span></p>
+                                        <p class="r-info">{{ course.intro }}</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+				<div class="category-course">
+					<p>
+                        {% for tag in com_tag %}
+                            {% if forloop.first %}
+                                <a href="{% url 'mooc:category_list' up_id=tag.uptag_id %}">
+                                    <span>{{ tag.uptag }}</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+						<ul class="category-tag">
+                        {% for tag in com_tag %}
+                            <li><a href="{% url 'mooc:category_list' up_id=tag.uptag_id sec_tag_id=tag.id %}">{{ tag.name }}</a></li>
+                        {% endfor %}
+						</ul>
+					<p>
+					<div class="category-course-info">
+						<div class="category-course-list">
+							<ul>
+                                {% for course in comcourse %}
+                                <li>
+									<a href="{% url 'mooc:video' cid=course.id %}"><img src="{{ course.photo.url }}"/></a>
+									<p>{{ course.intro }}</p>
+									<p class="r-belong"><span>贡献人：{{ course.autor }}</span></p>
+								</li>
+                                {% endfor %}
+							</ul>
+						</div>
+						<div class="category-course-comments">
+							<p>精彩评论</p>
+							<ul>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="category-course">
+					<p>
+                        {% for tag in eco_tag %}
+                            {% if forloop.first %}
+                                <a href="{% url 'mooc:category_list' up_id=tag.uptag_id %}">
+                                    <span>{{ tag.uptag }}</span>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+						<ul class="category-tag">
+                            {% for tag in eco_tag %}
+                                <li><a href="{% url 'mooc:category_list' up_id=tag.uptag_id sec_tag_id=tag.id %}">{{ tag.name }}</a></li>
+                            {% endfor %}
+						</ul>
+					<p>
+					<div class="category-course-info">
+						<div class="category-course-list">
+							<ul>
+                                {% for course in eco_course %}
+                                    <li>
+                                        <a href="{% url 'mooc:video' cid=course.id %}"><img src="{{ course.photo.url }}"/></a>
+                                        <p>{{ course.name }}</p>
+                                        <p class="r-belong"><span>贡献人：{{ course.autor }}</span></p>
+                                    </li>
+                                {% endfor %}
+							</ul>
+						</div>
+						<div class="category-course-comments">
+							<p>精彩评论</p>
+							<ul>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+								<li>
+									<a href="#">
+										<p>
+											<span class="comment-man">恶魔想做天使天使</span>
+										</p>
+										<p class="comment-content">我举得这个老师讲的不怎么样，一致照着PPT念，希望课堂以实践为主</p>
+										<p class="comment-title">计算机社会学计算机社会学计算机社会学</p>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<div class="mooc-foot">
+				<div class="foot-top">
+					<div class="foot-top-left">
+						<img src="{% static 'img/logo.png' %}"/>
+						<p>用心去学习，用心去创造，用心去感受，学习是我快乐。</p>
+					</div>
+					<div class="foot-top-right">
+						<div class="foot-top-right-1">
+							<p>关于我们</p>
+						</div>
+						<div class="foot-top-right-1">
+							<p>联系我们</p>
+						</div>
+						<div class="foot-top-right-1">
+							<p>友情链接</p>
+						</div>
+					</div>
+				</div>
+				<div class="foot-bottom">
+					<p style="text-align: center;">粤CR-32662--234 | 京ICP备666877777号-2 | 55666677878 </p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="{% static 'js/jquery-3.1.0.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/jquery.jSlider.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/index.js' %}" type="text/javascript" charset="utf-8"></script>
+
+</html>

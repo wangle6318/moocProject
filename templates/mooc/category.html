@@ -1,0 +1,184 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>与诗学堂</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/category.css' %}"/>
+{#		<link rel="stylesheet" type="text/css" href="css/jSlider.min.css"/>#}
+	</head>
+	<body>
+		<div class="mooc">
+			<div class="mooc-top">
+				<div class="top-title">
+					<div class="top-logo">
+						<img src="{% static 'img/logo.png' %}"/>
+					</div>
+					<div class="top-search">
+						<form action="" method="post">
+							<input type="text" name="" id="" value="" placeholder="搜索感兴趣的视频"/>
+							<button type="submit" value="search" class="search-btn" id="">
+								<img src="{% static 'img/search.png' %}"/>
+							</button>
+						</form>
+					</div>
+					<div class="top-login">
+						<a href="javascript:void(0);">登陆</a>
+						<span>|</span>
+						<a href="javascript:void(0);">注册</a>
+					</div>			
+				</div>
+			</div>
+			<div class="category-all">
+				<div class="category-left">
+					<div class="category-left-bread">
+						<a href="{% url 'mooc:index' %}">首页</a>
+						<span>></span>
+						<a href="#">全部课程</a>
+                        {% ifnotequal flaga 0 %}
+                            {% for tag in maintag %}
+                                {% ifequal tag.id flaga %}
+                                    <span>></span>
+                                    <span>{{ tag.name }}</span>
+                                {% endifequal %}
+                            {% endfor %}
+                        {% endifnotequal %}
+
+					</div>
+					<div class="category-left-nav">
+						<ul class="c-u-nav-1">
+                            {% ifequal flaga 0 %}
+                                <li class="c-u-nav-cur-1"><a href="{% url 'mooc:category_list' %}">全部课程</a></li>
+                            {% else %}
+                                <li><a href="{% url 'mooc:category_list' %}">全部课程</a></li>
+                            {% endifequal %}
+                            {% for tag in maintag %}
+                                {% ifequal flaga tag.id %}
+                                    <li class="c-u-nav-cur-1"><a href="{% url 'mooc:category_list' up_id=tag.id %}">{{ tag.name }}</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'mooc:category_list' up_id=tag.id %}">{{ tag.name }}</a></li>
+                                {% endifequal %}
+                            {% endfor %}
+						</ul>
+                        {% ifnotequal flaga 0 %}
+						<div class="c-u-nav-2">
+                            {% ifequal flagb 0 %}
+                            <li><a href="{% url 'mooc:category_list' up_id=flaga %}" class="c-u-nav-cur-2">全部</a></li>
+                            {% else %}
+                                <li><a href="{% url 'mooc:category_list' up_id=flaga %}">全部</a></li>
+                            {% endifequal %}
+
+                            {% for tag in sectag %}
+                                {% ifequal flagb tag.id %}
+                                    <li><a href="{% url 'mooc:category_list' up_id=tag.uptag_id sec_tag_id=tag.id %}" class="c-u-nav-cur-2">{{ tag.name }}</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'mooc:category_list' up_id=tag.uptag_id sec_tag_id=tag.id %}">{{ tag.name }}</a></li>
+                                {% endifequal %}
+                            {% endfor %}
+						</div>
+                        {% endifnotequal %}
+					</div>
+					<div class="category-left-sort">
+						<li><a href="javascript:void(0)" style="color: #55b929;">全部（{{ tag_course|length }}）</a></li>
+						<li class="category-left-sort-cur"><a href="">综合排序</a></li>
+						<li><a href="">热门</a></li>
+						<li><a href="">最新</a></li>
+					</div>
+					<div class="course-list">
+                        {% for course in video %}
+                            <div class="c-clist">
+                                <div class="c-img">
+                                    <img src="{{ course.photo.url }}"/>
+                                </div>
+                                <div class="c-course-info">
+                                    <div class="c-course-info-title">
+                                        <a href="{% url 'mooc:video' cid=course.id %}"><span>{{ course.name }}</span></a>
+                                    </div>
+                                    <div class="c-course-info-auther">
+                                        <a href="#">{{ course.autor }}</a>
+                                    </div>
+                                    <div class="c-course-info-intro">
+                                        <a href="{% url 'mooc:video' cid=course.id %}">
+                                            <span>
+                                                {{ course.intro }}
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="c-course-info-foot">
+                                        <span><img src="{% static 'img/collect2.svg' %}"/></span>
+                                        <span class="ccif-word">{{ course.views }}人浏览</span>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+					</div>
+					<div class="courser-card-list-page">
+						<ul class="c-pager">
+
+							        <li class="ys-pager-btn"><a href="?page={{ 1  }}">首页</a></li>
+
+                            {% if video.has_previous %}
+							    <li class="ys-pager-btn"><a href="?page={{ video.previous_page_number }}">上一页</a></li>
+                            {% endif %}
+                            {% for pg in video.paginator.page_range %}
+							    {% if video.number == pg %}
+							        <li class="ys-pager-item ys-cur-pager"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                                {% else %}
+							        <li class="ys-pager-item"><a href="?page={{ pg }}">{{ pg }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if video.has_next %}
+							    <li class="ys-pager-btn"><a href="?page={{ video.next_page_number }}">下一页</a></li>
+                            {% endif %}
+							<li class="ys-pager-btn"><a href="?page={{ video.paginator.num_pages }}">尾页</a></li>
+						</ul>
+					</div>
+					
+				</div>
+				<div class="category-right">
+					<div class="guanggao">
+						
+					</div>
+					
+					<div class="week-hot-course">
+						<div class="whc-title">
+							本周课程热度排行
+						</div>
+						<ul class="whc-course-list">
+                            {% for course in hotv %}
+                                <li><a href="{% url 'mooc:video' cid=course.id %}">{{ forloop.counter }}、&nbsp;{{ course.name }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>		
+			<div style="clear: both;"></div>
+			<div class="mooc-foot">
+				<div class="foot-top">
+					<div class="foot-top-left">
+						<img src="{% static 'img/logo.png' %}"/>
+						<p>用心去学习，用心去创造，用心去感受，学习是我快乐。</p>
+					</div>
+					<div class="foot-top-right">
+						<div class="foot-top-right-1">
+							<p>关于我们</p>
+						</div>
+						<div class="foot-top-right-1">
+							<p>联系我们</p>
+						</div>
+						<div class="foot-top-right-1">
+							<p>友情链接</p>
+						</div>
+					</div>
+				</div>
+				<div class="foot-bottom">
+					<p style="text-align: center;">王CR-31652--234 | 王ICP备68677777号-2 | 55666677878 </p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="{% static 'js/jquery-3.1.0.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/category.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/index.js' %}" type="text/javascript" charset="utf-8"></script>
+</html>

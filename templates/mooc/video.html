@@ -1,0 +1,159 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>与诗学堂</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/video.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/category.css' %}"/>
+	</head>
+	<body>
+		<div class="mooc">
+			<div class="mooc-top">
+				<div class="top-title">
+					<div class="top-logo">
+						<img src="{% static 'img/logo.png' %}"/>
+					</div>
+					<div class="top-search">
+						<form action="" method="post">
+							<input type="text" name="" id="" value="" placeholder="搜索感兴趣的视频"/>
+							<button type="submit" value="search" class="search-btn" id="">
+								<img src="{% static 'img/search.png' %}"/>
+							</button>
+						</form>
+					</div>
+					<div class="top-login">
+						<a href="javascript:void(0);">登陆</a>
+						<span>|</span>
+						<a href="javascript:void(0);">注册</a>
+					</div>			
+				</div>
+			</div>
+			<div class="video-content">
+				
+				<div class="video-left">
+					<h3>{{ video.name }}<span>&nbsp;&nbsp;正在学习中...</span></h3>
+					<div class="video-frame">
+						<video id="myvideo" playsinline controls="controls" autoplay>
+							<source src="{{ video.video.url }}" type="video/mp4"></source>
+                            <source src="{{ video.video.url }}" type="video/avi"></source>
+						</video>
+					</div>
+					
+					<div class="video-collect">
+						<p>
+							当前播放器为html5，如播放不畅可报告故障
+							<button class="video-like"><img src="{% static 'img/collection-a.svg' %}"/><span>点击喜欢</span></button>
+							<button class="video-score">
+								<span>评分</span>
+								<img src="{% static 'img/star-a.svg' %}"/>
+                                <img src="{% static 'img/star-a.svg' %}"/>
+                                <img src="{% static 'img/star-a.svg' %}"/>
+                                <img src="{% static 'img/star-a.svg' %}"/>
+                                <img src="{% static 'img/star-a.svg' %}"/>
+								<input type="hidden" id="com-score">  
+							</button>
+						</p>				
+					</div>
+					
+					<div class="video-comment">
+						<div class="top-comment">
+							<h3><strong>视频评论</strong><span>共1337条评论</span></h3>
+							<div class="comment-area">
+								<textarea name="" rows="" cols=""></textarea>
+								<p><button>发表评论</button></p>
+							</div>
+							
+						</div>
+						<div class="middle-comment">
+							<h3><strong>全部评论</strong></h3>
+							<ul class="comment-list">
+								<li class="single-comment">
+									<div class="comment-list-top">
+										<span class="com-author">追剧小奶鹅</span>
+										<span class="com-date">2018/12/27</span>
+									</div>
+									<div class="comment-list-middle">
+										即使在祖母呵护下长大的明兰也不禁让人心疼啊，原以为在祖母的庇护下明兰可以过的不那么小心谨慎，谁曾想明兰依然过得小心翼翼的，她怎么会不懂元若哥哥的心，只是不想像小姨娘那样在斗争中“离开吧”，更不忍心给照顾她的祖母添麻烦，她知道其他几个姐姐的心思，也知道自己的身份地位，所以便处处躲着他吧。
+									</div>
+									<div class="comment-list-bottom">
+										<span class="upvote"><a href="javascript:void(0);"><img src="{% static 'img/good-a.svg' %}"/>(118)</a></span>
+										<span class="cpvote"><a href="javascript:void(0);"><img src="{% static 'img/bad-a.svg' %}"/>(3)</a></span>
+										<span class="reply"><a href="javascript:void(0);">回复(10)</a></span>
+									</div>
+
+									<!--<div class="reply-area">
+										<textarea name="" rows="" cols=""></textarea>
+										<p><a href="javascript:void(0);">回复</a></p>
+									</div>-->
+								</li>
+								<li>
+									<div class="comment-list-top">
+										<span class="com-author">追剧小奶鹅</span>
+										<span class="com-date">2018/12/27</span>
+									</div>
+									<div class="comment-list-middle">
+										即使在祖母呵护下长大的明兰也不禁让人心疼啊，原以为在祖母的庇护下明兰可以过的不那么小心谨慎，谁曾想明兰依然过得小心翼翼的，她怎么会不懂元若哥哥的心，只是不想像小姨娘那样在斗争中“离开吧”，更不忍心给照顾她的祖母添麻烦，她知道其他几个姐姐的心思，也知道自己的身份地位，所以便处处躲着他吧。
+									</div>
+									<div class="comment-list-bottom">
+										<span class="upvote"><a href="javascript:void(0);"><img src="{% static 'img/good-a.svg' %}"/>(118)</a></span>
+										<span class="cpvote"><a href="javascript:void(0);"><img src="{% static 'img/bad-a.svg' %}"/>(3)</a></span>
+										<span class="reply"><a href="javascript:void(0);">回复(10)</a></span>
+									</div>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+					
+					
+				</div>
+				
+				
+				<div class="video-right">
+					<div class="guanggao">
+						
+					</div>
+					
+					<div class="week-hot-course">
+						<div class="whc-title">
+							本周课程热度排行
+						</div>
+						<ul class="whc-course-list">
+							{% for course in hotv %}
+                                <li><a href="{% url 'mooc:video' cid=course.id %}">{{ forloop.counter }}、&nbsp;{{ course.name }}</a></li>
+                            {% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div style="clear: both;"></div>
+			<div class="mooc-foot">
+				<div class="foot-top">
+					<div class="foot-top-left">
+						<img src="{% static 'img/logo.png' %}"/>
+						<p>用心去学习，用心去创造，用心去感受，学习是我快乐。</p>
+					</div>
+					<div class="foot-top-right">
+						<div class="foot-top-right-1">
+							<p>关于我们</p>
+						</div>
+						<div class="foot-top-right-1">
+							<p>联系我们</p>
+						</div>
+						<div class="foot-top-right-1">
+							<p>友情链接</p>
+						</div>
+					</div>
+				</div>
+				<div class="foot-bottom">
+					<p style="text-align: center;">王CR-31652--234 | 王ICP备68677777号-2 | 55666677878 </p>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="{% static 'js/jquery-3.1.0.min.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/video.js' %}" type="text/javascript" charset="utf-8"></script>
+	<script src="{% static 'js/index.js' %}" type="text/javascript" charset="utf-8"></script>
+</html>
